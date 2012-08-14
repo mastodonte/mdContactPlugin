@@ -5,3 +5,7 @@ mdContact:
 mdContactOptions:
   url: /contacts.html
   param: { module: mdContact, action: options }
+
+mdContactViaAjax:
+  url: /contactsajax.html
+  param: { module: mdContact, action: mdContactViaAjax}
