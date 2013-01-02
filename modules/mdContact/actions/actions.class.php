@@ -83,7 +83,11 @@ class mdContactActions extends sfActions {
     
     $param['body'] = $this->getPartial('mail', array('form' => $form));
 
+    if($this->form->getValue('subject'))
+          $param['subject'] = $this->form->getValue('subject');
+      else
     $param['subject'] = $mdMailXMLHandler->getContactTitle();
+
 
     $recipientString = (string) $mdMailXMLHandler->getRecipient();
     $param['recipients'] = explode(",", $recipientString);
