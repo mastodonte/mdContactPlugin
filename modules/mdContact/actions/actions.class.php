@@ -24,7 +24,8 @@ class mdContactActions extends sfActions {
       $this->form->bind($params);
 
       if ($this->form->isValid()) {
-        $this->sendMail();
+        if($this->sendMail())
+          $this->form = new mdContactForm();
       }
     }
 
