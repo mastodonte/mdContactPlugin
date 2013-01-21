@@ -24,7 +24,8 @@ class mdContactActions extends sfActions {
       $this->form->bind($params);
 
       if ($this->form->isValid()) {
-        $this->sendMail();
+        if($this->sendMail())
+          $this->form = new mdContactForm();
       }
     }
 
@@ -84,8 +85,13 @@ class mdContactActions extends sfActions {
     
     $param['body'] = $this->getPartial('mail', array('form' => $form));
 
+    if($this->form->getValue('subject'))
+          $param['subject'] = $this->form->getValue('subject');
+      else
     $param['subject'] = $mdMailXMLHandler->getContactTitle();
+
     $param['subject'] = str_replace('[Nombre]', $this->form->getValue('nombre'), $param['subject']);
+
     $recipientString = (string) $mdMailXMLHandler->getRecipient();
     $param['recipients'] = explode(",", $recipientString);
 
