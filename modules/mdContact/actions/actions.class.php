@@ -43,6 +43,7 @@ class mdContactActions extends sfActions {
       if ($this->form->isValid()) {
         $mdMailXMLHandler = new mdMailXMLHandler();
         $subject = (string) $mdMailXMLHandler->getContactTitle();
+        $subject = str_replace('[Nombre]', $this->form->getValue('nombre'), $subject);
         //$subject = sfConfig::get('app_title_contact');
         $body = $this->getPartial('mail', array('form' => $this->form));
         $this->getUser()->setFlash('mdContactSend', 'Send');
@@ -89,6 +90,7 @@ class mdContactActions extends sfActions {
       else
     $param['subject'] = $mdMailXMLHandler->getContactTitle();
 
+    $param['subject'] = str_replace('[Nombre]', $this->form->getValue('nombre'), $param['subject']);
 
     $recipientString = (string) $mdMailXMLHandler->getRecipient();
     $param['recipients'] = explode(",", $recipientString);
