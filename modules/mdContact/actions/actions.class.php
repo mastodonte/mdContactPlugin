@@ -92,6 +92,7 @@ class mdContactActions extends sfActions {
 
     $recipientString = (string) $mdMailXMLHandler->getRecipient();
     $param['recipients'] = explode(",", $recipientString);
+    $param['realtime'] = true;
 
     if ($mdMailXMLHandler->getFromClient() == 0) {
       $param['sender'] = array('name' => $mdMailXMLHandler->getFrom(), 'email' => $mdMailXMLHandler->getEmail());
