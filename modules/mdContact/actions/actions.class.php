@@ -26,6 +26,7 @@ class mdContactActions extends sfActions {
       if ($this->form->isValid()) {
         if($this->sendMail())
           $this->form = new mdContactForm();
+          $this->getUser()->setFlash('mdContact', true);
       }
     }
 
@@ -63,6 +64,8 @@ class mdContactActions extends sfActions {
     $salida = array();
     if ($this->form->isValid()) {
       $salida['result'] = (integer) $this->sendMail();
+      $this->form = new mdContactForm();
+      $this->getUser()->setFlash('mdContact', true);
     } else {
       $salida['result'] = 0;
     }
